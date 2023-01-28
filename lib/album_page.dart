@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:tungalahari/model/songs.dart';
 import 'package:tungalahari/song.dart';
 
 class AlbumPage extends StatelessWidget {
-  const AlbumPage({Key? key}) : super(key: key);
+  final List<Songs>? totalSongs;
+  final String? albumImage;
+
+  const AlbumPage({Key? key, this.totalSongs, this.albumImage})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +24,7 @@ class AlbumPage extends StatelessWidget {
               flexibleSpace: FlexibleSpaceBar(
                 centerTitle: false,
                 background: Image.network(
-                  "https://images.pexels.com/photos/396547/pexels-photo-396547.jpeg?auto=compress&cs=tinysrgb&h=350",
+                  '$albumImage',
                   fit: BoxFit.cover,
                 ),
               ),
@@ -28,27 +32,39 @@ class AlbumPage extends StatelessWidget {
           ];
         },
         body: ListView.builder(
-          itemCount: 10,
+          padding: EdgeInsets.zero,
+          itemCount: totalSongs!.length,
           itemBuilder: (context, index) {
             return Card(
               color: Colors.white,
               elevation: 5,
               child: ListTile(
-                  leading: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "$index",
-                      ),
-                    ],
-                  ),
-                  title: Text("Song Name".tr),
-                  subtitle: Text("subtitle".tr),
-                  trailing: Text("12:90"),
-                  onTap: () {
-                    Navigator.of(context).push(
-                        MaterialPageRoute(builder: (context) => Song()));
-                  }),
+                leading: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "$index",
+                    ),
+                  ],
+                ),
+                title: Text("${totalSongs![index].name}"),
+                subtitle: Text("${totalSongs![index].subtitle}"),
+                trailing: Text("${totalSongs![index].duration}"),
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => Song(
+                          name: totalSongs![index].name,
+                          duration: totalSongs![index].duration,
+                          singerName: totalSongs![index].singerName,
+                          subtitle: totalSongs![index].subtitle,
+                          url: totalSongs![index].url,
+                          songLayers: totalSongs![index].songLayers,
+                          albumImage: albumImage),
+                    ),
+                  );
+                },
+              ),
             );
           },
         ),

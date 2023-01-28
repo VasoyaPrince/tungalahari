@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tungalahari/album_page.dart';
+import 'package:tungalahari/model/album.dart';
 
 class AlbumItems extends StatelessWidget {
+  final Album album;
+
   const AlbumItems({
     Key? key,
+    required this.album,
   }) : super(key: key);
 
   @override
@@ -20,7 +24,7 @@ class AlbumItems extends StatelessWidget {
             children: <Widget>[
               Expanded(
                 child: Image.network(
-                  'https://picsum.photos/250?image=112',
+                  album.image!,
                   fit: BoxFit.cover,
                   // height: double.infinity,
                   width: double.infinity,
@@ -34,13 +38,14 @@ class AlbumItems extends StatelessWidget {
                   children: [
                     Align(
                       alignment: Alignment.centerLeft,
-                      child: Text("Title".tr,
+                      child: Text(album.title!.tr,
                           style: const TextStyle(
-                              color: Colors.black, fontSize: 18)),
+                              color: Colors.black, fontSize: 15)),
                     ),
                     Align(
                       alignment: Alignment.centerLeft,
-                      child: Text("Total Songs".tr,
+                      child: Text(
+                          "${album.totalSongs?.length} ${'Total Songs'.tr}",
                           style: const TextStyle(
                               color: Colors.black, fontSize: 10)),
                     ),
@@ -55,7 +60,8 @@ class AlbumItems extends StatelessWidget {
   }
 
   void _navigateToNextScreen(BuildContext context) {
-    Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => AlbumPage()));
+    Navigator.of(context).push(MaterialPageRoute(
+        builder: (context) =>
+            AlbumPage(totalSongs: album.totalSongs, albumImage: album.image)));
   }
 }

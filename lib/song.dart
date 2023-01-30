@@ -33,64 +33,6 @@ class _SongState extends State<Song> {
   Duration duration = Duration.zero;
   Duration position = Duration.zero;
 
-  String htmlData = """
-    <p>You're fighting me off like a firefighter</p>
-    <p>So tell me why you still get burned</p>
-    <p>You say you're not, but you're still a liar</p>
-    <p>'Cause I'm the one that you run to first</p>
-    <p>Every time, yeah</p>
-    <p>Why do you try to deny it</p>
-    <p>When you show up every night</p>
-    <p>And tell me that you want me but it's complicated</p>
-    <p>So complicated</p>
-    <p>When it hurts but it hurts so good</p>
-    <p>Do you take it?</p>
-    <p>Do you break it off?</p>
-    <p>When it hurts but it hurts so good</p>
-    <p>Can you say it?</p>
-     <p>Can you say it? </p>
-     <p>Your love is like (hey, na-na-na, na-na)</p>
-     <p>Your love is like (hey, na-na-na, na-na)</p>
-     <p>It hurts so good (hey, na-na-na, na-na)</p>
-     <p>Your love is like (hey, na-na-na, na-na)</p>
-     <p>It hurts so good</p>
-     <p>Every time that I swear it's over</p>
-     <p>It makes you want me even more</p>
-     <p>You pull away and I come in closer</p>
-     <p>And all we ever stay is torn</p>
-     <p>And baby, I don't know</p>
-     <p>Why I try to deny it</p>
-     <p>When you show up every night</p>
-     <p>I tell you that I want you but it's complicated</p>
-     <p>So complicated</p>
-     <p>When it hurts but it hurts so good</p>
-     <p>Do you take it?</p>
-     <p>Do you break it off?</p>
-     <p>When it hurts but it hurts so good</p>
-     <p>Can you say it?</p>
-     <p>Can you say it?</p>
-     <p>Your love is like (hey, na-na-na, na-na)</p>
-     <p>Your love is like (hey, na-na-na, na-na)</p>
-     <p>It hurts so good (hey, na-na-na, na-na)</p>
-     <p>Your love is like (hey, na-na-na, na-na)</p>
-     <p>Ooh, it hurts so good</p>
-     <p>Wide awake through the daylight</p>
-     <p>Will you hold me like we're running a yellow light?</p>
-     <p>Reach for you with my hands tied</p>
-     <p>Are we dancing like we're burning in paradise?</p>
-     <p>When it hurts but it hurts so good</p>
-     <p>Do you take it?</p>
-     <p>Do you break it off?</p>
-     <p>When it hurts but it hurts so good</p>
-     <p>Can you say it?</p>
-     <p>Can you say it?</p>
-     <p>Your love is like (hey, na-na-na, na-na)</p>
-     <p>Your love is like (hey, na-na-na, na-na)</p>
-     <p>Ooh, it hurts so good (hey, na-na-na, na-na)</p>
-     <p>Your love is like (hey, na-na-na, na-na)</p>
-     <p>It hurts so good </p>
-""";
-
   @override
   void initState() {
     super.initState();
@@ -153,7 +95,7 @@ class _SongState extends State<Song> {
                       ),
                       Container(
                         alignment: Alignment.center,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                             gradient: LinearGradient(
                           colors: [Colors.black38, Colors.transparent],
                           begin: Alignment.topCenter,
@@ -194,7 +136,7 @@ class _SongState extends State<Song> {
                             const SizedBox(
                               height: 20,
                             ),
-                            Container(
+                            SizedBox(
                               width: 320,
                               child: ProgressBar(
                                 timeLabelTextStyle: const TextStyle(
@@ -243,7 +185,7 @@ class _SongState extends State<Song> {
                                   horizontal: 10, vertical: 0),
                               child: Container(
                                 alignment: Alignment.bottomRight,
-                                child: Icon(
+                                child: const Icon(
                                   Icons.arrow_circle_down_outlined,
                                   color: Colors.white,
                                   size: 30,
@@ -260,19 +202,17 @@ class _SongState extends State<Song> {
             ),
           ];
         },
-        body: Container(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Html(
-              data: widget.songLayers,
-              tagsList: Html.tags,
-              style:{
-                "body": Style(
-                  fontSize: FontSize(18.0),
-                  fontWeight: FontWeight.bold,
-                ),
-              },
-            ),
+        body: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Html(
+            data: widget.songLayers,
+            tagsList: Html.tags,
+            style: {
+              "body": Style(
+                fontSize: const FontSize(18.0),
+                fontWeight: FontWeight.bold,
+              ),
+            },
           ),
         ),
       ),

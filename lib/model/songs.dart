@@ -1,21 +1,28 @@
 class Songs {
-  final String? name;
-  final String? subtitle;
+  final String? id;
+  final String? title;
   final String? duration;
   final String? url;
-  final String? singerName;
-  final String? songLayers;
+  final String? writer;
+  final String? lyrics;
 
-  Songs({this.name, this.subtitle, this.duration, this.url, this.singerName,this.songLayers});
+  Songs({
+    this.id,
+    this.title,
+    this.duration,
+    this.url,
+    this.writer,
+    this.lyrics,
+  });
 
   factory Songs.fromJson(Map<String, dynamic> json) {
     return Songs(
-      name: json['Name'],
-      subtitle: json['subtitle'],
+      id: json['id'],
+      title: json['title'],
       duration: json['duration'],
       url: json['url'],
-      singerName: json['singerName'],
-      songLayers: json['songLayers'],
+      writer: json['writer'],
+      lyrics: json['lyrics'],
     );
   }
 }

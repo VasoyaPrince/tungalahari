@@ -47,19 +47,19 @@ class AlbumPage extends StatelessWidget {
                     ),
                   ],
                 ),
-                title: Text("${totalSongs![index].name}"),
-                subtitle: Text("${totalSongs![index].subtitle}"),
+                title: Text("${totalSongs![index].title}"),
+                subtitle: Text("${totalSongs![index].writer}"),
                 trailing: Text("${totalSongs![index].duration}"),
                 onTap: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) => Song(
-                          name: totalSongs![index].name,
+                          name: totalSongs![index].title,
                           duration: totalSongs![index].duration,
-                          singerName: totalSongs![index].singerName,
-                          subtitle: totalSongs![index].subtitle,
+                          singerName: totalSongs![index].writer,
+                          subtitle: totalSongs![index].writer,
                           url: totalSongs![index].url,
-                          songLayers: totalSongs![index].songLayers,
+                          songLayers: totalSongs![index].lyrics,
                           albumImage: albumImage),
                     ),
                   );

@@ -24,7 +24,7 @@ class AlbumItems extends StatelessWidget {
             children: <Widget>[
               Expanded(
                 child: Image.network(
-                  album.image!,
+                  '',
                   fit: BoxFit.cover,
                   // height: double.infinity,
                   width: double.infinity,
@@ -62,6 +62,6 @@ class AlbumItems extends StatelessWidget {
   void _navigateToNextScreen(BuildContext context) {
     Navigator.of(context).push(MaterialPageRoute(
         builder: (context) =>
-            AlbumPage(totalSongs: album.totalSongs, albumImage: album.image)));
+            AlbumPage(totalSongs: album.totalSongs, albumImage: '')));
   }
 }

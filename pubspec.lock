@@ -21,10 +21,10 @@ packages:
     dependency: "direct main"
     description:
       name: audioplayers
-      sha256: "5616d6b84351e63e4b5e20125b24b2af6b5c1700ec3f6a96d1bcff0a2086a778"
+      sha256: "16451eab798b23ad9307aef6f9ca62bb8fb06542af8810eead0d236d3fd40a42"
       url: "https://pub.dev"
     source: hosted
-    version: "3.0.0"
+    version: "3.0.1"
   audioplayers_android:
     dependency: transitive
     description:
@@ -37,10 +37,10 @@ packages:
     dependency: transitive
     description:
       name: audioplayers_darwin
-      sha256: b2be46402332603bb1d1763e0bbefad97d3aa71d9099148df23bc564a20af524
+      sha256: e7a3c8759bf11ecfe4b20df338bf9f3d37c7719a5761c46a3833aba0ceeaacff
       url: "https://pub.dev"
     source: hosted
-    version: "3.0.0"
+    version: "3.0.1"
   audioplayers_linux:
     dependency: transitive
     description:

@@ -10,12 +10,12 @@
       "title_mal": "ശ്രീ ഗുരു സുവര്ണമാലാ",
       "title_guj": "શ્રી ગુરુ સુવર્ણમાલા",
       "numOfSongs": 6,
-      "info": {
         "vocals": "Sringeri Sisters; Smt. Sharada Ramanan; Smt. Srilakshmi Vishwanath; Kum. S. Bharati",
-        "director": "Shri R.K. Shriramkumar",
+          "director": "Shri R.K. Shriramkumar",
         "producer": "The Chityala Family; New York",
+          "musicUri": "",
+      "info": {
         "music": {
-          "violin": ""
         }
       },
       "songs": [
@@ -145,10 +145,10 @@
       "title_mal": "ഭക്തി സുധാ തരങ്ഗിനീ",
       "title_guj": "ભક્તિ સુધા તરઙ્ગિની",
       "numOfSongs": 11,
-      "info": {
         "vocals": "Sringeri Sisters; Smt. Sharada Ramanan, Kum T. Srilakshmi, Kum S. Bharati",
         "director": "Shri. R. K. Shriramkumar",
         "producer": "The Chityala Family; New York",
+      "info": {
         "music": {
           "violin": "Shri. R. K. Shriramkumar",
           "flute": "Shri. B. Balasai",
@@ -411,10 +411,10 @@
       "title_mal": "ഭക്തി സുധാ തരങ്ഗിനീ",
       "title_guj": "ભક્તિ સુધા તરઙ્ગિની",
       "numOfSongs": 7,
-      "info": {
         "vocals": "Sringeri Sisters; Smt. Sharada Ramanan, Kum T. Srilakshmi, Kum S. Bharati",
         "director": "Shri. R. K. Shriramkumar",
         "producer": "The Chityala Family; New York",
+      "info": {
         "music": {
           "violin": "Shri. R. K. Shriramkumar",
           "flute": "Shri. B. Balasai",
@@ -568,10 +568,10 @@
       "title_mal": "ഭക്തി സുധാ തരങ്ഗിനീ",
       "title_guj": "ભક્તિ સુધા તરઙ્ગિની",
       "numOfSongs": 6,
-      "info": {
         "vocals": "Sringeri Sisters; Smt. Sharada Ramanan, Kum T. Srilakshmi, Kum S. Bharati",
         "director": "Shri. R. K. Shriramkumar",
         "producer": "The Chityala Family; New York",
+      "info": {
         "music": {
           "violin": "Shri. R. K. Shriramkumar",
           "flute": "Shri. B. Balasai",
@@ -706,10 +706,10 @@
       "title_mal": "ഗുരുദ്ēവതാസ്തുതിലഹരീ",
       "title_guj": "ગુરુદ્ēવતાસ્તુતિલહરી",
       "numOfSongs": 14,
-      "info": {
         "vocals": "Smt. Sharada Ramanan; Kum. Bharati",
         "director": "Sri. R. K. Shriramkumar",
         "producer": "",
+      "info": {
         "music": {
           "Violin": "Sri. R. K. Shriramkumar",
           "Mridangam": "Sri. K. Arunprakash",
@@ -1024,10 +1024,10 @@
       "title_mal": "ഭക്തി സുധാ",
       "title_guj": "ભક્તિ સુધા",
       "numOfSongs": 6,
-      "info": {
         "vocals": "Sringeri Sisters; Smt. Sharada and Smt. Srilakshmi",
         "director": "Sringeri Asthana Vidwan; Shri T. S. Anantharama Bhagavathar; Mumbai",
         "producer": "Sri Bharati Tirtha Trust, Sringeri",
+      "info": {
         "music": {
           "violin": "Shiv Kumar",
           "keyboard": "Prem Kumar",
@@ -1177,10 +1177,10 @@
       "title_mal": "",
       "title_guj": "",
       "numOfSongs": 6,
+      "vocals": "Sringeri Sisters; Smt. Sharada and Smt. Srilakshmi",
+      "director": "Sringeri Asthana Vidwan; Shri T. S. Anantharama Bhagavathar; Mumbai",
+      "producer": "Sri Bharati Tirtha Trust, Sringeri",
       "info": {
-        "vocals": "Sringeri Sisters; Smt. Sharada and Smt. Srilakshmi",
-        "director": "Sringeri Asthana Vidwan; Shri T. S. Anantharama Bhagavathar; Mumbai",
-        "producer": "Sri Bharati Tirtha Trust, Sringeri",
         "music": {
           "veena": "Smt. Hemalata Veeramani",
           "violin": "Shri. Shivkumar A and Smt. B. Shanta",
@@ -1327,10 +1327,10 @@
       "title_mal": "",
       "title_guj": "",
       "numOfSongs": 7,
+      "vocals": "Sringeri Sisters; Smt. Sharada and Smt. Srilakshmi",
+      "director": "Sringeri Asthana Vidwan; Shri T. S. Anantharama Bhagavathar; Mumbai",
+      "producer": "Sri Bharati Tirtha Trust, Sringeri",
       "info": {
-        "vocals": "Sringeri Sisters; Smt. Sharada and Smt. Srilakshmi",
-        "director": "Sringeri Asthana Vidwan; Shri T. S. Anantharama Bhagavathar; Mumbai",
-        "producer": "Sri Bharati Tirtha Trust, Sringeri",
         "music": {
           "veena": "Smt. Hemalata Veeramani",
           "violin": "Shri. Shivkumar A and Smt. B. Shanta",
@@ -1490,10 +1490,10 @@
       "title_mal": "",
       "title_guj": "",
       "numOfSongs": 15,
+      "vocals": "Shri T. M. Krishna & Smt. Sangeetha Sivakumar",
+      "director": "",
+      "producer": "The Chityala Family; New York",
       "info": {
-        "vocals": "Shri T. M. Krishna & Smt. Sangeetha Sivakumar",
-        "director": "",
-        "producer": "The Chityala Family; New York",
         "music": {
           "violin": "Shri. R. K. Shriramkumar",
           "flute": "Smt. Mala Chandrasekars",
@@ -1805,10 +1805,10 @@
       "title_mal": "ശ്രീ ശാരദാ സ്തുതി മഞ്ജരീ",
       "title_guj": "શ્રી શારદા સ્તુતિ મઞ્જરી",
       "numOfSongs": 9,
+      "vocals": "Smt. Bombay Jayashri",
+      "director": "Shri. R. K. Shriramkumar",
+      "producer": "The Chityala Family; New York",
       "info": {
-        "vocals": "Smt. Bombay Jayashri",
-        "director": "Shri. R. K. Shriramkumar",
-        "producer": "The Chityala Family; New York",
         "music": {
           "violin": "Shri. R. K. Shriramkumar",
           "mridangam": "Shri. N Manoj Siva",
@@ -1999,10 +1999,10 @@
       "title_mal": "ശ്രീ ശാരദാ സ്തുതി മഞ്ജരീ",
       "title_guj": "શ્રી શારદા સ્તુતિ મઞ્જરી",
       "numOfSongs": 16,
+      "vocals": "Sangita Kalanidhi Smt. R. Vedavalli",
+      "director": "",
+      "producer": "The Chityala Family; New York",
       "info": {
-        "vocals": "Sangita Kalanidhi Smt. R. Vedavalli",
-        "director": "",
-        "producer": "The Chityala Family; New York",
         "music": {
           "violin": "Shri. R. K. Shriramkumar",
           "mridangam": "Shri. K. Arunprakash"
@@ -2347,10 +2347,10 @@
       "title_mal": "ഗുരുകീര്തനാനി - ശ്രീ സദാശിവേന്ദ്രസ്തവഃ",
       "title_guj": "ગુરુકીર્તનાનિ - શ્રી સદાશિવેન્દ્રસ્તવઃઃ",
       "numOfSongs": 2,
+      "vocals": "Smt. Meenakshi Ganesh, Smt. Bhavana Iyer & Kumari. Maalavika Sundar",
+      "director": "Sri.V.Subrahmaniam",
+      "producer": "The Chityala Family; New York",
       "info": {
-        "vocals": "Smt. Meenakshi Ganesh, Smt. Bhavana Iyer & Kumari. Maalavika Sundar",
-        "director": "Sri.V.Subrahmaniam",
-        "producer": "The Chityala Family; New York",
         "music": {
           "veena": "Smt. Jayalakshmi Sekhar",
           "violin": "Shri. R. K. Shriramkumar",

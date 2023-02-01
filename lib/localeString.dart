@@ -1,11 +1,13 @@
 import 'package:get/get.dart';
+import 'package:tungalahari/model/album.dart';
 
 class LocaleString extends Translations {
+  late final Album album;
   @override
   Map<String, Map<String, String>> get keys => {
         'en_US': {
           'Title': 'Title',
-          'Total Songs': 'Total Songs',
+          'Songs': 'Total Songs',
           'Album Title': 'Album Title',
           'Song Name': 'Song Name',
           'subtitle': 'subtitle',
@@ -14,7 +16,7 @@ class LocaleString extends Translations {
         },
         'hi_IN': {
           'Title': 'शीर्षक',
-          'Total Songs': 'कुल गीत',
+          'Songs': 'कुल गीत',
           'Album Title': 'एल्बम का शीर्षक',
           'Song Name': 'गाने का नाम',
           'subtitle': 'उपशीर्षक',
@@ -23,7 +25,7 @@ class LocaleString extends Translations {
         },
         'kn_IN': {
           'Title': 'ಶೀರ್ಷಿಕೆ',
-          'Total Songs': 'ಒಟ್ಟು ಹಾಡುಗಳು',
+          'Songs': 'ಒಟ್ಟು ಹಾಡುಗಳು',
           'Album Title': 'ಆಲ್ಬಮ್ ಶೀರ್ಷಿಕೆ',
           'Song Name': 'ಹಾಡಿನ ಹೆಸರು',
           'subtitle': 'ಉಪಶೀರ್ಷಿಕೆ',
@@ -32,7 +34,7 @@ class LocaleString extends Translations {
         },
         'tm_IN': {
           'Title': 'தலைப்பு',
-          'Total Songs': 'மொத்த பாடல்கள்',
+          'Songs': 'மொத்த பாடல்கள்',
           'Album Title': 'ஆல்பத்தின் தலைப்பு',
           'Song Name': 'பாடல் பெயர்',
           'subtitle': 'வசன வரிகள்',
@@ -41,7 +43,7 @@ class LocaleString extends Translations {
         },
         'tg_IN': {
           'Title': 'శీర్షిక',
-          'Total Songs': 'మొత్తం పాటలు',
+          'Songs': 'మొత్తం పాటలు',
           'Album Title': 'ఆల్బమ్ శీర్షిక',
           'Song Name': 'పాట పేరు',
           'subtitle': 'ఉపశీర్షిక',

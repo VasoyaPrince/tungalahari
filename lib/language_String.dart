@@ -1,3 +1,4 @@
+import 'package:Tungalahari/utils.dart';
 import 'package:flutter/material.dart';
 
 class LanguageString extends StatelessWidget {
@@ -22,30 +23,23 @@ class LanguageString extends StatelessWidget {
     this.teluguText,
     this.gujaratiText,
     this.malayalamText,
-    this.style, this.textAlign,
+    this.style,
+    this.textAlign,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Text(chooseLanguage(language), style: style);
-  }
-
-  String chooseLanguage(String selectedLanguage) {
-    switch (selectedLanguage) {
-      case "Devanagari":
-        return "$devanagariText";
-      case "Kannada":
-        return "$kannadaText";
-      case "Tamil":
-        return "$tamilText";
-      case "Telugu":
-        return "$teluguText";
-      case "Gujarati":
-        return "$gujaratiText";
-      case "Malayalam":
-        return "$malayalamText";
-      default:
-        return englishText;
-    }
+    return Text(
+        Utils.chooseLanguage(
+          language,
+          englishText: englishText,
+          tamilText: tamilText,
+          devanagariText: devanagariText,
+          kannadaText: kannadaText,
+          teluguText: teluguText,
+          gujaratiText: gujaratiText,
+          malayalamText: malayalamText,
+        ),
+        style: style);
   }
 }

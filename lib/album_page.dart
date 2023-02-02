@@ -1,19 +1,19 @@
+import 'package:Tungalahari/language_String.dart';
+import 'package:Tungalahari/model/album.dart';
+import 'package:Tungalahari/model/songs.dart';
+import 'package:Tungalahari/song.dart';
 import 'package:flutter/material.dart';
-import 'package:tungalahari/language_String.dart';
-import 'package:tungalahari/model/album.dart';
-import 'package:tungalahari/model/songs.dart';
-import 'package:tungalahari/song.dart';
 
 class AlbumPage extends StatelessWidget {
   final List<Songs>? totalSongs;
   final Album album;
-  final String? language;
+  final String language;
 
   const AlbumPage({
     Key? key,
     this.totalSongs,
     required this.album,
-    this.language,
+    required this.language,
   }) : super(key: key);
 
   @override
@@ -48,7 +48,7 @@ class AlbumPage extends StatelessWidget {
                       title: Padding(
                         padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
                         child: LanguageString(
-                          language: language!,
+                          language: language,
                           englishText: totalSongs![index].title!,
                           tamilText: totalSongs![index].titleTam,
                           devanagariText: totalSongs![index].titleDev,
@@ -60,7 +60,7 @@ class AlbumPage extends StatelessWidget {
                       subtitle: Padding(
                         padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
                         child: LanguageString(
-                          language: language!,
+                          language: language,
                           englishText: totalSongs![index].writer!,
                           tamilText: totalSongs![index].writerTam,
                           devanagariText: totalSongs![index].titleDev,
@@ -77,26 +77,9 @@ class AlbumPage extends StatelessWidget {
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (context) => Song(
-                              name: totalSongs![index].title,
-                              duration: totalSongs![index].duration,
-                              singerName: totalSongs![index].writer,
-                              subtitle: totalSongs![index].writer,
-                              url: totalSongs![index].url,
-                              songLayers: totalSongs![index].lyrics,
+                              songs: totalSongs![index],
                               albumImage: album.id,
                               vocals: album.vocals,
-                              titleTel: totalSongs![index].titleTel,
-                              titleKan: totalSongs![index].titleKan,
-                              titleDev: totalSongs![index].titleDev,
-                              titleTam: totalSongs![index].titleTam,
-                              writerKan: totalSongs![index].writerKan,
-                              writerTel: totalSongs![index].writerTel,
-                              writerDev: totalSongs![index].writerDev,
-                              writerTam: totalSongs![index].writerTam,
-                              lyricsIast: totalSongs![index].lyricsIast,
-                              lyricsKan: totalSongs![index].lyricsKan,
-                              lyricsTam: totalSongs![index].lyricsTam,
-                              lyricsTel: totalSongs![index].lyricsTel,
                               language: language,
                             ),
                           ),

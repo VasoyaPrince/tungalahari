@@ -1,4 +1,4 @@
-import 'package:tungalahari/model/songs.dart';
+import 'package:Tungalahari/model/songs.dart';
 
 class Album {
   final String? id;

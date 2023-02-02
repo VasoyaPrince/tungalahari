@@ -1,56 +1,25 @@
+import 'package:Tungalahari/language_String.dart';
+import 'package:Tungalahari/model/songs.dart';
+import 'package:Tungalahari/utils.dart';
 import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
-import 'package:tungalahari/language_String.dart';
-import 'package:tungalahari/model/songs.dart';
 
 class Song extends StatefulWidget {
-  final String? name;
-  final String? subtitle;
-  final String? duration;
-  final String? url;
+  final Songs songs;
   final String? singerName;
   final String? albumImage;
   final String? vocals;
-  final String? songLayers;
-  final String? titleTel;
-  final String? titleKan;
-  final String? titleDev;
-  final String? titleTam;
   final String? language;
-  final String? writerKan;
-  final String? writerTel;
-  final String? writerDev;
-  final String? writerTam;
-  final String? lyricsIast;
-  final String? lyricsKan;
-  final String? lyricsTam;
-  final String? lyricsTel;
 
   const Song({
     Key? key,
-    this.name,
-    this.subtitle,
-    this.duration,
-    this.url,
+    required this.songs,
     this.singerName,
     this.albumImage,
-    this.songLayers,
     this.vocals,
-    this.titleTel,
-    this.titleKan,
-    this.titleDev,
-    this.titleTam,
     this.language,
-    this.writerKan,
-    this.writerTel,
-    this.writerDev,
-    this.writerTam,
-    this.lyricsIast,
-    this.lyricsKan,
-    this.lyricsTam,
-    this.lyricsTel,
   }) : super(key: key);
 
   @override
@@ -90,7 +59,7 @@ class _SongState extends State<Song> {
 
   Future setAudio() async {
     player.setReleaseMode(ReleaseMode.loop);
-    await player.play(UrlSource("${widget.url}"));
+    await player.play(UrlSource("${widget.songs.url}"));
   }
 
   @override
@@ -141,10 +110,10 @@ class _SongState extends State<Song> {
                             ),
                             LanguageString(
                               language: widget.language!,
-                              englishText: widget.name!,
-                              tamilText: widget.titleTam,
-                              devanagariText: widget.titleDev,
-                              kannadaText: widget.titleKan,
+                              englishText: widget.songs.title!,
+                              tamilText: widget.songs.titleTam,
+                              devanagariText: widget.songs.titleDev,
+                              kannadaText: widget.songs.titleKan,
                               style: const TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
@@ -156,11 +125,11 @@ class _SongState extends State<Song> {
                               width: 300,
                               child: LanguageString(
                                 language: widget.language!,
-                                englishText: widget.subtitle!,
-                                tamilText: widget.writerTam,
-                                devanagariText: widget.writerDev,
-                                kannadaText: widget.writerKan,
-                                teluguText: widget.writerTel,
+                                englishText: widget.songs.writer!,
+                                tamilText: widget.songs.writerTam,
+                                devanagariText: widget.songs.writerDev,
+                                kannadaText: widget.songs.writerKan,
+                                teluguText: widget.songs.writerTel,
                                 style: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 12.0,
@@ -258,7 +227,14 @@ class _SongState extends State<Song> {
             padding: const EdgeInsets.all(8.0),
             child: Center(
               child: Html(
-                data: widget.songLayers,
+                data: Utils.chooseLanguage(
+                  widget.language!,
+                  englishText: widget.songs.lyricsIast!,
+                  tamilText: widget.songs.lyricsTam,
+                  devanagariText: widget.songs.lyrics,
+                  kannadaText: widget.songs.lyricsKan,
+                  teluguText: widget.songs.lyricsTel,
+                ),
                 tagsList: Html.tags,
                 shrinkWrap: true,
                 style: {

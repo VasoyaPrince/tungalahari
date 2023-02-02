@@ -1,17 +1,14 @@
 import 'dart:convert';
+import 'package:Tungalahari/albumItems.dart';
+import 'package:Tungalahari/localeString.dart';
+import 'package:Tungalahari/model/album.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:tungalahari/albumItems.dart';
-import 'package:tungalahari/localeString.dart';
-import 'package:tungalahari/model/album.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(
-      const SystemUiOverlayStyle(
-          statusBarColor: Color(0xFFB71C1C)
-      )
-  );
+      const SystemUiOverlayStyle(statusBarColor: Color(0xFFB71C1C)));
   runApp(const MyApp());
 }
 
@@ -24,10 +21,9 @@ const List<String> list = <String>[
   'Gujarati',
   'Malayalam'
 ];
- String languageValue = "English" ;
 
 class MyApp extends StatelessWidget {
-   const MyApp({super.key});
+  const MyApp({super.key});
 
   // This widget is the root of your application.
   @override
@@ -68,6 +64,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   List<Album>? albums;
   bool isData = false;
+  String dropdownValue = list.first;
 
   @override
   void initState() {
@@ -99,7 +96,43 @@ class _MyHomePageState extends State<MyHomePage> {
               pinned: true,
             ),
             SliverPersistentHeader(
-              delegate: Delegate(),
+              delegate: Delegate(
+                child: Container(
+                  color: Colors.white,
+                  child: Row(
+                    children: [
+                      const SizedBox(width: 10),
+                      const Expanded(child: Text("Select Language")),
+                      const SizedBox(width: 140),
+                      Expanded(
+                        child: DropdownButton<String>(
+                          value: dropdownValue,
+                          icon: const Icon(Icons.arrow_drop_down_sharp),
+                          elevation: 8,
+                          isExpanded: false,
+                          alignment: AlignmentDirectional.center,
+                          underline: Container(),
+                          onChanged: (String? value) {
+                            setState(() {
+                              dropdownValue = value!;
+                            });
+                          },
+                          items: list.map<DropdownMenuItem<String>>(
+                            (String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                enabled: true,
+                                child: Text(value),
+                              );
+                            },
+                          ).toList(),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                height: 30,
+              ),
               pinned: true,
             ),
             if (isData)
@@ -115,7 +148,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 itemBuilder: (BuildContext context, int index) {
                   return AlbumItems(
                     album: albums![index],
-                    language: languageValue,
+                    language: dropdownValue,
                   );
                 },
               )
@@ -133,76 +166,26 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 
 class Delegate extends SliverPersistentHeaderDelegate {
+  final Widget child;
+  final double height;
+
+  Delegate({required this.child, required this.height});
+
   @override
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return Container(
-      color: Colors.white,
-      child: Row(
-        children: const [
-          SizedBox(
-            width: 10,
-          ),
-          Expanded(child: Text("Select Language")),
-          SizedBox(
-            width: 140,
-          ),
-          Expanded(child: DropdownButtonExample()),
-        ],
-      ),
-    );
+    return child;
   }
 
   @override
-  double get maxExtent => 30;
+  double get maxExtent => height;
 
   @override
-  double get minExtent => 30;
+  double get minExtent => height;
 
   @override
   bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) {
     return true;
-  }
-}
-
-class DropdownButtonExample extends StatefulWidget {
-
-  const DropdownButtonExample({super.key});
-
-  @override
-  State<DropdownButtonExample> createState() => _DropdownButtonExampleState();
-}
-
-class _DropdownButtonExampleState extends State<DropdownButtonExample> {
-  String dropdownValue = list.first;
-
-
-
-  @override
-  Widget build(BuildContext context) {
-    return DropdownButton<String>(
-      value: dropdownValue,
-      icon: const Icon(Icons.arrow_drop_down_sharp),
-      elevation: 8,
-      isExpanded: false,
-      alignment: AlignmentDirectional.center,
-      underline: Container(),
-      onChanged: (String? value) {
-        setState(() {
-          dropdownValue = value!;
-          languageValue = value;
-        });
-      },
-      items: list.map<DropdownMenuItem<String>>(
-        (String value) {
-          return DropdownMenuItem<String>(
-            value: value,
-            enabled: true,
-            child: Text(value),
-          );
-        },
-      ).toList(),
-    );
   }
 }
 

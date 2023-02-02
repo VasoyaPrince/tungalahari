@@ -1,8 +1,7 @@
+import 'package:Tungalahari/album_page.dart';
+import 'package:Tungalahari/language_String.dart';
+import 'package:Tungalahari/model/album.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:tungalahari/album_page.dart';
-import 'package:tungalahari/language_String.dart';
-import 'package:tungalahari/model/album.dart';
 
 class AlbumItems extends StatelessWidget {
   final Album album;
@@ -23,7 +22,6 @@ class AlbumItems extends StatelessWidget {
         elevation: 5,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
-          // mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             SizedBox(
               height: 150,
@@ -36,7 +34,7 @@ class AlbumItems extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
               child: Column(
-                // mainAxisSize: MainAxisSize.min,
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   Align(
                     alignment: Alignment.centerLeft,
@@ -49,7 +47,7 @@ class AlbumItems extends StatelessWidget {
                       kannadaText: album.titleKan,
                       malayalamText: album.titleMal,
                       teluguText: album.titleTel,
-                      style: const TextStyle(color: Colors.black, fontSize: 13),
+                      style: const TextStyle(color: Colors.black, fontSize: 12),
                     ),
                   ),
                   const SizedBox(
@@ -57,7 +55,7 @@ class AlbumItems extends StatelessWidget {
                   ),
                   Align(
                     alignment: Alignment.centerLeft,
-                    child: Text("${album.totalSongs?.length} ${'Songs'.tr}",
+                    child: Text("${album.totalSongs?.length} ${'Songs'}",
                         style: const TextStyle(
                             color: Colors.black38, fontSize: 10)),
                   ),

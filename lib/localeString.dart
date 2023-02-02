@@ -1,5 +1,6 @@
+
+import 'package:Tungalahari/model/album.dart';
 import 'package:get/get.dart';
-import 'package:tungalahari/model/album.dart';
 
 class LocaleString extends Translations {
   late final Album album;

@@ -1,4 +1,4 @@
-name: tungalahari
+name: Tungalahari
 description: A new Flutter project.
 
 # The following line prevents the package from being accidentally published to
@@ -40,8 +40,8 @@ dependencies:
   audio_video_progress_bar: ^0.11.0
   get:
   flutter_html: ^2.2.1
-  flutter_launcher_icons: ^0.11.0
-
+  flutter_launcher_icons:
+  flutter_native_splash:
 
 dependency_overrides:
   video_player: ^2.5.1
@@ -50,11 +50,9 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-#flutter_icons:
-#      android: "launcher_icon"
-#      ios: true
-#      image_path: "assets/icon/ic_sharada.png"
-#      min_sdk_android: 21
+
+
+
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -79,6 +77,17 @@ flutter:
     - assets/
     - assets/images/
 
+flutter_native_splash:
+    color: "#FF0000"
+    image: assets/images/ic_sharada.png
+    fullscreen: true
+    android_gravity: clip_horizontal
+
+flutter_icons:
+      android: "launcher_icon"
+      ios: true
+      image_path: "assets/images/ic_sharada.png"
+      min_sdk_android: 21
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
@@ -105,3 +114,4 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+

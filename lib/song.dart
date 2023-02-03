@@ -1,10 +1,19 @@
+import 'dart:async';
+import 'dart:developer';
+import 'dart:isolate';
+import 'dart:ui';
+
 import 'package:Tungalahari/language_String.dart';
 import 'package:Tungalahari/model/songs.dart';
+import 'package:Tungalahari/service/download_service.dart';
 import 'package:Tungalahari/utils.dart';
 import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class Song extends StatefulWidget {
   final Songs songs;
@@ -31,11 +40,14 @@ class _SongState extends State<Song> {
   bool isPlaying = false;
   Duration duration = Duration.zero;
   Duration position = Duration.zero;
+  late TaskInfo _taskInfo;
+  bool _isLoading = true;
+  StreamSubscription? _downloadStream;
 
   @override
   void initState() {
     super.initState();
-
+    _taskInfo = TaskInfo(link: widget.songs.url);
     setAudio();
 
     player.onPlayerStateChanged.listen((event) {
@@ -55,6 +67,36 @@ class _SongState extends State<Song> {
         position = event;
       });
     });
+    _prepare();
+  }
+
+  Future<void> _prepare() async {
+    final tasks = await FlutterDownloader.loadTasks();
+    if (tasks != null) {
+      for (var task in tasks) {
+        if (_taskInfo.link == task.url) {
+          _taskInfo.taskId = task.taskId;
+          _taskInfo.status = task.status;
+          _taskInfo.progress = task.progress;
+        }
+      }
+      setState(() {
+        _isLoading = false;
+      });
+    }
+    _downloadStream =
+        DownloadService().downloadTask.listen((TaskInfo taskInfo) async {
+      try {
+        if (taskInfo == _taskInfo) {
+          setState(() {
+            _taskInfo.status = taskInfo.status;
+            _taskInfo.progress = taskInfo.progress;
+          });
+        }
+      } catch (e) {
+        log('$e');
+      }
+    });
   }
 
   Future setAudio() async {
@@ -65,6 +107,7 @@ class _SongState extends State<Song> {
   @override
   void dispose() {
     player.dispose();
+    _downloadStream?.cancel();
     super.dispose();
   }
 
@@ -204,11 +247,47 @@ class _SongState extends State<Song> {
                                   horizontal: 10, vertical: 0),
                               child: Container(
                                 alignment: Alignment.bottomRight,
-                                child: Image.asset(
-                                  'assets/images/download.png',
-                                  color: Colors.white,
-                                  width: 30,
-                                  height: 30,
+                                child: InkWell(
+                                  onTap: _taskInfo.status ==
+                                              DownloadTaskStatus.running ||
+                                          _taskInfo.status ==
+                                              DownloadTaskStatus.complete
+                                      ? null
+                                      : () {
+                                          DownloadService()
+                                              .downloadFile(_taskInfo);
+                                        },
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(30.0),
+                                    child: _taskInfo.status ==
+                                            DownloadTaskStatus.running
+                                        ? SizedBox.square(
+                                            dimension: 40,
+                                            child: Stack(
+                                              children: [
+                                                const CircularProgressIndicator(),
+                                                Text(
+                                                  "${_taskInfo.progress} %",
+                                                  style: const TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 12.0,
+                                                  ),
+                                                  textAlign: TextAlign.center,
+                                                ),
+                                              ],
+                                            ),
+                                          )
+                                        : _taskInfo.status ==
+                                                DownloadTaskStatus.complete
+                                            ? Image.asset(
+                                                'assets/images/downloaded.png',
+                                                width: 40.0,
+                                                height: 30.0)
+                                            : Image.asset(
+                                                'assets/images/download.png',
+                                                width: 40.0,
+                                                height: 30.0),
+                                  ),
                                 ),
                               ),
                             )
@@ -251,10 +330,3 @@ class _SongState extends State<Song> {
     );
   }
 }
-
-// LanguageString(language: widget.language!,
-// englishText: widget.songLayers!,
-// tamilText: widget.lyricsTel,
-// devanagariText: widget.lyricsTam,
-// kannadaText: widget.lyricsKan,
-// teluguText: widget.writerTel,

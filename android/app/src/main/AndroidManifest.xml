@@ -1,8 +1,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.tungalahari">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
    <application
         android:label="tungalahari"
         android:name="${applicationName}"
+       android:usesCleartextTraffic="true"
         android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"
@@ -27,6 +34,16 @@
         </activity>
         <!-- Don't delete the meta-data below.
              This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
+
+       <provider
+           android:name="vn.hunghd.flutterdownloader.DownloadedFileProvider"
+           android:authorities="${applicationId}.flutter_downloader.provider"
+           android:exported="false"
+           android:grantUriPermissions="true">
+           <meta-data
+               android:name="android.support.FILE_PROVIDER_PATHS"
+               android:resource="@xml/provider_paths"/>
+       </provider>
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />

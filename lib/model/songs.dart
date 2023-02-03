@@ -58,7 +58,7 @@ class Songs {
       lyricsKan: json['lyrics_kan'],
       lyricsTam: json['lyrics_tam'],
       lyricsTel: json['lyrics_tel'],
-      //url: json['url'],
+      url: json['music_uri'],
     );
   }
 }

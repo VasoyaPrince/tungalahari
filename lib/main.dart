@@ -1,12 +1,14 @@
 import 'dart:convert';
 import 'package:Tungalahari/albumItems.dart';
-import 'package:Tungalahari/localeString.dart';
 import 'package:Tungalahari/model/album.dart';
+import 'package:Tungalahari/service/download_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get/get.dart';
+import 'package:flutter_downloader/flutter_downloader.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await FlutterDownloader.initialize(ignoreSsl: true);
   SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(statusBarColor: Color(0xFFB71C1C)));
   runApp(const MyApp());
@@ -22,16 +24,32 @@ const List<String> list = <String>[
   'Malayalam'
 ];
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
+
+  @override
+  void initState() {
+    super.initState();
+    DownloadService();
+  }
+
+  @override
+  void dispose() {
+    DownloadService().dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
+    return MaterialApp(
       title: 'Flutter Demo',
-      translations: LocaleString(),
-      locale: const Locale('en ', 'US'),
       // builder: (context, child) {
       //   return ScrollConfiguration(
       //     behavior: ScrollBehaviour(),

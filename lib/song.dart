@@ -40,6 +40,7 @@ class _SongState extends State<Song> {
   late TaskInfo _taskInfo;
   bool _isLoading = true;
   StreamSubscription? _downloadStream;
+  bool _isReady = false;
 
   @override
   void initState() {
@@ -96,10 +97,13 @@ class _SongState extends State<Song> {
     });
   }
 
-  Future setAudio() async {
+  Future<void> setAudio() async {
     player.setReleaseMode(ReleaseMode.loop);
     //UrlSource("${widget.songs.url}")
     await player.play(UrlSource("${widget.songs.url}"));
+    setState(() {
+      _isReady = true;
+    });
   }
 
   @override
@@ -202,30 +206,29 @@ class _SongState extends State<Song> {
                             ),
                             SizedBox(
                               width: 320,
-                              child: ProgressBar(
-                                timeLabelTextStyle: const TextStyle(
-                                  color: Colors.white,
+                              child: AbsorbPointer(
+                                absorbing: !_isReady,
+                                child: ProgressBar(
+                                  timeLabelTextStyle: const TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                  progress: position,
+                                  buffered: const Duration(milliseconds: 2000),
+                                  total: duration,
+                                  progressBarColor: Colors.red,
+                                  baseBarColor: Colors.white.withOpacity(0.24),
+                                  bufferedBarColor:
+                                      Colors.white.withOpacity(0.24),
+                                  thumbColor: Colors.white,
+                                  barHeight: 3.0,
+                                  thumbRadius: 5.0,
+                                  onSeek: (duration) async {
+                                    final position =
+                                        Duration(seconds: duration.inSeconds);
+                                    await player.seek(duration);
+                                    await player.pause();
+                                  },
                                 ),
-                                progress: Duration(
-                                  seconds: position.inSeconds,
-                                ),
-                                buffered: const Duration(milliseconds: 2000),
-                                total: Duration(
-                                  seconds: duration.inSeconds,
-                                ),
-                                progressBarColor: Colors.red,
-                                baseBarColor: Colors.white.withOpacity(0.24),
-                                bufferedBarColor:
-                                    Colors.white.withOpacity(0.24),
-                                thumbColor: Colors.white,
-                                barHeight: 3.0,
-                                thumbRadius: 5.0,
-                                onSeek: (duration) async {
-                                  final position =
-                                      Duration(seconds: duration.inSeconds);
-                                  await player.seek(duration);
-                                  await player.pause();
-                                },
                               ),
                             ),
                             const SizedBox(
@@ -263,8 +266,8 @@ class _SongState extends State<Song> {
                                               DownloadTaskStatus.complete
                                       ? null
                                       : () {
-                                          DownloadService()
-                                              .downloadFile(_taskInfo,widget.songs.title!);
+                                          DownloadService().downloadFile(
+                                              _taskInfo, widget.songs.title!);
                                         },
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(30.0),
@@ -329,8 +332,7 @@ class _SongState extends State<Song> {
                 shrinkWrap: true,
                 style: {
                   "body": Style(
-                    fontSize: const FontSize(18.0),
-                  ),
+                      fontSize: const FontSize(18.0), display: Display.BLOCK),
                   "p": Style(
                     margin: EdgeInsets.zero,
                   ),

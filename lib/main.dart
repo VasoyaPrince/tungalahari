@@ -2,21 +2,22 @@ import 'dart:convert';
 import 'package:Tungalahari/albumItems.dart';
 import 'package:Tungalahari/model/album.dart';
 import 'package:Tungalahari/service/download_service.dart';
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await FlutterDownloader.initialize(ignoreSsl: true);
+  await FlutterDownloader.initialize(debug: true, ignoreSsl: true);
   SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(statusBarColor: Color(0xFFB71C1C)));
   runApp(const MyApp());
 }
 
 const List<String> list = <String>[
-  'English',
   'Devanagari',
+  'IAST',
   'Kannada',
   'Tamil',
   'Telugu',
@@ -50,12 +51,12 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      // builder: (context, child) {
-      //   return ScrollConfiguration(
-      //     behavior: ScrollBehaviour(),
-      //     child: child!,
-      //   );
-      // },
+      builder: (context, child) {
+        return ScrollConfiguration(
+          behavior: ScrollBehaviour(),
+          child: child!,
+        );
+      },
       theme: ThemeData(
           primarySwatch: Colors.red,
           primaryTextTheme: const TextTheme(
@@ -121,13 +122,13 @@ class _MyHomePageState extends State<MyHomePage> {
                     children: [
                       const SizedBox(width: 10),
                       const Expanded(child: Text("Select Language")),
-                      const SizedBox(width: 140),
+                      const SizedBox(width: 45),
                       Expanded(
-                        child: DropdownButton<String>(
+                        child: DropdownButton2<String>(
                           value: dropdownValue,
+                          dropdownWidth: 120,
                           icon: const Icon(Icons.arrow_drop_down_sharp),
-                          elevation: 8,
-                          isExpanded: false,
+                          isExpanded: true,
                           alignment: AlignmentDirectional.center,
                           underline: Container(),
                           onChanged: (String? value) {
@@ -157,11 +158,11 @@ class _MyHomePageState extends State<MyHomePage> {
               SliverGrid.builder(
                 itemCount: albums!.length,
                 gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                  maxCrossAxisExtent: 270,
-                  mainAxisExtent: 230,
-                  crossAxisSpacing: 5,
+                  maxCrossAxisExtent: 278,
+                  mainAxisExtent: 248,
+                  crossAxisSpacing: 0,
                   childAspectRatio: (itemWidth / itemHeight),
-                  mainAxisSpacing: 5,
+                  mainAxisSpacing: 0,
                 ),
                 itemBuilder: (BuildContext context, int index) {
                   return AlbumItems(

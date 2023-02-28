@@ -65,7 +65,7 @@ class DownloadService {
     await FlutterDownloader.cancel(taskId: taskId);
   }
 
-  Future<bool> downloadFile(TaskInfo task) async {
+  Future<bool> downloadFile(TaskInfo task,String fileName) async {
     Directory dir;
     try {
       if (await _checkPermission()) {
@@ -75,7 +75,7 @@ class DownloadService {
       }
       log("path ${dir.path}");
       Fluttertoast.showToast(msg: "Downloading");
-      await _requestDownload(task, dir.path);
+      await _requestDownload(task, dir.path,fileName);
       return true;
     } catch (e) {
       log('$e');
@@ -115,12 +115,13 @@ class DownloadService {
     return savedDir;
   }
 
-  Future<void> _requestDownload(TaskInfo task, String path) async {
+  Future<void> _requestDownload(TaskInfo task, String path, String fileName) async {
     task.taskId = await FlutterDownloader.enqueue(
       url: task.link!,
       // headers: {"auth": "test_for_sql_encoding"},
       savedDir: path,
       showNotification: true,
+      fileName: fileName,
       openFileFromNotification: true,
       saveInPublicStorage: true,
     );

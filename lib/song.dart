@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:developer';
-import 'dart:isolate';
 import 'dart:ui';
 
 import 'package:Tungalahari/language_String.dart';
@@ -12,8 +11,6 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:flutter_html/flutter_html.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 class Song extends StatefulWidget {
   final Songs songs;
@@ -101,6 +98,7 @@ class _SongState extends State<Song> {
 
   Future setAudio() async {
     player.setReleaseMode(ReleaseMode.loop);
+    //UrlSource("${widget.songs.url}")
     await player.play(UrlSource("${widget.songs.url}"));
   }
 
@@ -118,7 +116,7 @@ class _SongState extends State<Song> {
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
           return <Widget>[
             SliverAppBar(
-              expandedHeight: 260.0,
+              expandedHeight: 330,
               floating: false,
               titleSpacing: 0.0,
               pinned: true,
@@ -128,7 +126,7 @@ class _SongState extends State<Song> {
                 titlePadding: EdgeInsets.zero,
                 centerTitle: false,
                 background: SizedBox(
-                  height: 250.0,
+                  height: 220.0,
                   child: Stack(
                     fit: StackFit.expand,
                     children: <Widget>[
@@ -149,23 +147,30 @@ class _SongState extends State<Song> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             const SizedBox(
-                              height: 35,
+                              height: 25,
                             ),
-                            LanguageString(
-                              language: widget.language!,
-                              englishText: widget.songs.title!,
-                              tamilText: widget.songs.titleTam,
-                              devanagariText: widget.songs.titleDev,
-                              kannadaText: widget.songs.titleKan,
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18.0,
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(20, 0, 10, 0),
+                              child: LanguageString(
+                                language: widget.language!,
+                                englishText: widget.songs.title!,
+                                tamilText: widget.songs.titleTam,
+                                devanagariText: widget.songs.titleDev,
+                                kannadaText: widget.songs.titleKan,
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18.0,
+                                ),
+                                textAlign: TextAlign.center,
+                                maxLine: 3,
                               ),
-                              textAlign: TextAlign.center,
                             ),
-                            SizedBox(
-                              width: 300,
+                            const SizedBox(
+                              height: 8,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(15, 0, 10, 0),
                               child: LanguageString(
                                 language: widget.language!,
                                 englishText: widget.songs.writer!,
@@ -178,24 +183,22 @@ class _SongState extends State<Song> {
                                   fontSize: 12.0,
                                 ),
                                 textAlign: TextAlign.center,
+                                maxLine: 2,
                               ),
                             ),
                             const SizedBox(
-                              height: 15,
+                              height: 18,
                             ),
-                            SizedBox(
-                              width: 320,
-                              child: Text(
-                                "${widget.vocals}",
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 12.0,
-                                ),
-                                textAlign: TextAlign.center,
+                            Text(
+                              "${widget.vocals}",
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 12.0,
                               ),
+                              textAlign: TextAlign.center,
                             ),
                             const SizedBox(
-                              height: 20,
+                              height: 25,
                             ),
                             SizedBox(
                               width: 320,
@@ -225,6 +228,9 @@ class _SongState extends State<Song> {
                                 },
                               ),
                             ),
+                            const SizedBox(
+                              height: 10,
+                            ),
                             GestureDetector(
                               onTap: () async {
                                 if (isPlaying) {
@@ -238,9 +244,12 @@ class _SongState extends State<Song> {
                                     ? 'assets/images/pause.png'
                                     : 'assets/images/play.png',
                                 color: Colors.white,
-                                height: 50,
-                                width: 50,
+                                height: 60,
+                                width: 60,
                               ),
+                            ),
+                            const SizedBox(
+                              width: 10,
                             ),
                             Padding(
                               padding: const EdgeInsets.symmetric(
@@ -255,7 +264,7 @@ class _SongState extends State<Song> {
                                       ? null
                                       : () {
                                           DownloadService()
-                                              .downloadFile(_taskInfo);
+                                              .downloadFile(_taskInfo,widget.songs.title!);
                                         },
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(30.0),
@@ -290,6 +299,9 @@ class _SongState extends State<Song> {
                                   ),
                                 ),
                               ),
+                            ),
+                            const SizedBox(
+                              width: 5,
                             )
                           ],
                         ),
@@ -314,13 +326,18 @@ class _SongState extends State<Song> {
                   kannadaText: widget.songs.lyricsKan,
                   teluguText: widget.songs.lyricsTel,
                 ),
-                tagsList: Html.tags,
                 shrinkWrap: true,
                 style: {
                   "body": Style(
                     fontSize: const FontSize(18.0),
-                    fontWeight: FontWeight.bold,
                   ),
+                  "p": Style(
+                    margin: EdgeInsets.zero,
+                  ),
+                  // "div": Style(
+                  //   margin: EdgeInsets.zero,
+                  //   padding: EdgeInsets.zero,
+                  // ),
                 },
               ),
             ),

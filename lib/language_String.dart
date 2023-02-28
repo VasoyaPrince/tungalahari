@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:Tungalahari/utils.dart';
 import 'package:flutter/material.dart';
 
@@ -12,6 +14,7 @@ class LanguageString extends StatelessWidget {
   final String? malayalamText;
   final TextStyle? style;
   final TextAlign? textAlign;
+  final int? maxLine;
 
   const LanguageString({
     Key? key,
@@ -24,22 +27,24 @@ class LanguageString extends StatelessWidget {
     this.gujaratiText,
     this.malayalamText,
     this.style,
-    this.textAlign,
+    this.textAlign, this.maxLine,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Text(
-        Utils.chooseLanguage(
-          language,
-          englishText: englishText,
-          tamilText: tamilText,
-          devanagariText: devanagariText,
-          kannadaText: kannadaText,
-          teluguText: teluguText,
-          gujaratiText: gujaratiText,
-          malayalamText: malayalamText,
-        ),
-        style: style);
+      Utils.chooseLanguage(
+        language,
+        englishText: englishText,
+        tamilText: tamilText,
+        devanagariText: devanagariText,
+        kannadaText: kannadaText,
+        teluguText: teluguText,
+        gujaratiText: gujaratiText,
+        malayalamText: malayalamText,
+      ),
+      style: style,
+      textAlign: textAlign,
+      maxLines:maxLine,);
   }
 }

@@ -41,12 +41,14 @@ dependencies:
   flutter_html: ^2.2.1
   flutter_launcher_icons:
   flutter_native_splash:
-  flutter_downloader: ^1.10.1+2
+  flutter_downloader: ^1.10.2
   path_provider: ^2.0.12
   android_path_provider: ^0.3.0
   permission_handler: ^10.2.0
   fluttertoast: ^8.1.2
   device_info_plus: ^8.0.0
+  dropdown_button2: ^1.0.0
+  sliver_tools: ^0.2.9
 
 dependency_overrides:
   video_player: ^2.5.1

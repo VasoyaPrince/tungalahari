@@ -86,9 +86,18 @@ class _MyHomePageState extends State<MyHomePage> {
   String dropdownValue = list.first;
 
   @override
+  void setState(VoidCallback fn) {
+    if (mounted) {
+      super.setState(fn);
+    }
+  }
+
+  @override
   void initState() {
     super.initState();
-    albumData();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      albumData();
+    });
   }
 
   Future<void> albumData() async {

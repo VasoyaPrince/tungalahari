@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:Tungalahari/utils.dart';
 import 'package:flutter/material.dart';
 
@@ -27,7 +25,8 @@ class LanguageString extends StatelessWidget {
     this.gujaratiText,
     this.malayalamText,
     this.style,
-    this.textAlign, this.maxLine,
+    this.textAlign,
+    this.maxLine,
   }) : super(key: key);
 
   @override
@@ -45,6 +44,7 @@ class LanguageString extends StatelessWidget {
       ),
       style: style,
       textAlign: textAlign,
-      maxLines:maxLine,);
+      maxLines: maxLine,
+    );
   }
 }

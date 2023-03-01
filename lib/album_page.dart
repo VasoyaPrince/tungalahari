@@ -1,8 +1,8 @@
+import 'package:flutter/material.dart';
 import 'package:Tungalahari/language_String.dart';
 import 'package:Tungalahari/model/album.dart';
 import 'package:Tungalahari/model/songs.dart';
 import 'package:Tungalahari/song.dart';
-import 'package:flutter/material.dart';
 
 class AlbumPage extends StatelessWidget {
   final List<Songs>? totalSongs;
@@ -128,66 +128,69 @@ class MySliverAppBar extends SliverPersistentHeaderDelegate {
   @override
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
+    double progress = shrinkOffset < kToolbarHeight
+        ? shrinkOffset / maxExtent
+        : (shrinkOffset + kToolbarHeight) / maxExtent;
     return Stack(
-      clipBehavior: Clip.none,
       fit: StackFit.expand,
       children: [
         Image.asset(
           'assets/images/bg_floral.png',
           fit: BoxFit.cover,
         ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Expanded(
-              child: Image.asset(
-                'assets/images/${album.id}.png',
-                width: 200,
-                height: 200,
-              ),
-            ),
-            LanguageString(
-              language: language!,
-              englishText: album.title!,
-              tamilText: album.titleTel,
-              devanagariText: album.titleDev,
-              kannadaText: album.titleKan,
-              teluguText: album.titleTel,
-              style: const TextStyle(
-                color: Colors.black87,
-                fontSize: 18,
-              ),
-            ),
-            const SizedBox(height: 5)
-          ],
-        ),
-        Opacity(
-          opacity: shrinkOffset < kToolbarHeight
-              ? shrinkOffset / expandedHeight
-              : (shrinkOffset + kToolbarHeight) / expandedHeight,
+        AnimatedOpacity(
+          duration: const Duration(milliseconds: 150),
+          opacity: progress,
           child: Container(
             color: Colors.red,
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(15, 8, 8, 15),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Text(
-                    "${album.title}",
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w700,
-                      fontSize: 20,
-                    ),
-                    textAlign: TextAlign.left,
+            padding: const EdgeInsets.fromLTRB(15, 8, 8, 15),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Text(
+                  "${album.title}",
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w700,
+                    fontSize: 20,
                   ),
-                ],
-              ),
+                  textAlign: TextAlign.left,
+                ),
+              ],
             ),
+          ),
+        ),
+        AnimatedOpacity(
+          duration: const Duration(milliseconds: 150),
+          opacity: 1 - progress,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Expanded(
+                child: Image.asset(
+                  'assets/images/${album.id}.png',
+                  width: 200,
+                  height: 200,
+                ),
+              ),
+              LanguageString(
+                language: language!,
+                englishText: album.title!,
+                tamilText: album.titleTel,
+                devanagariText: album.titleDev,
+                kannadaText: album.titleKan,
+                teluguText: album.titleTel,
+                style: const TextStyle(
+                  color: Colors.black87,
+                  fontSize: 18,
+                ),
+              ),
+              const SizedBox(height: 5)
+            ],
           ),
         ),
       ],

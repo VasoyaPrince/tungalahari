@@ -34,7 +34,8 @@ class AlbumItems extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -49,7 +50,8 @@ class AlbumItems extends StatelessWidget {
                         kannadaText: album.titleKan,
                         malayalamText: album.titleMal,
                         teluguText: album.titleTel,
-                        style: const TextStyle(color: Colors.black, fontSize: 12),
+                        style:
+                            const TextStyle(color: Colors.black, fontSize: 12),
                         maxLine: 2,
                       ),
                     ),
@@ -75,8 +77,8 @@ class AlbumItems extends StatelessWidget {
   void _navigateToNextScreen(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) =>
-            AlbumPage(totalSongs: album.totalSongs, album: album, language:language),
+        builder: (context) => AlbumPage(
+            totalSongs: album.totalSongs, album: album, language: language),
       ),
     );
   }

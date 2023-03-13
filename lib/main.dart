@@ -261,7 +261,7 @@ class MySliverAppBar extends SliverPersistentHeaderDelegate {
               textAlign: TextAlign.center,
             ),
             const Text(
-              "Sharda peetham Sringeri",
+              "Sharda Peetham Sringeri",
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 18,

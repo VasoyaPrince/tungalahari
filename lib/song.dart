@@ -130,10 +130,10 @@ class MySliverAppBar extends SliverPersistentHeaderDelegate {
               kannadaText: song.titleKan,
               style: const TextStyle(
                 color: Colors.white,
-                fontWeight: FontWeight.w700,
-                fontSize: 20,
+                fontSize: 18,
               ),
               textAlign: TextAlign.left,
+              maxLine: 1,
             ),
           ),
         ),

@@ -60,15 +60,31 @@ class AlbumPage extends StatelessWidget {
                             ),
                             title: Padding(
                               padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
-                              child: LanguageString(
-                                language: language,
-                                englishText: totalSongs![index].title!,
-                                tamilText: totalSongs![index].titleTam,
-                                devanagariText: totalSongs![index].titleDev,
-                                kannadaText: totalSongs![index].titleKan,
-                                teluguText: totalSongs![index].titleTel,
-                                style: const TextStyle(fontSize: 16),
-                              ),
+                              child: totalSongs![index].isDownland == true
+                                  ? LanguageString(
+                                      language: language,
+                                      englishText:
+                                          "${totalSongs![index].title!} ✔",
+                                      tamilText:
+                                          "${totalSongs![index].titleTam} ✔",
+                                      devanagariText:
+                                          "${totalSongs![index].titleDev} ✔",
+                                      kannadaText:
+                                          "${totalSongs![index].titleKan} ✔",
+                                      teluguText:
+                                          "${totalSongs![index].titleTel} ✔",
+                                      style: const TextStyle(fontSize: 16),
+                                    )
+                                  : LanguageString(
+                                      language: language,
+                                      englishText: totalSongs![index].title!,
+                                      tamilText: totalSongs![index].titleTam,
+                                      devanagariText:
+                                          totalSongs![index].titleDev,
+                                      kannadaText: totalSongs![index].titleKan,
+                                      teluguText: totalSongs![index].titleTel,
+                                      style: const TextStyle(fontSize: 16),
+                                    ),
                             ),
                             subtitle: Padding(
                               padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
@@ -76,9 +92,9 @@ class AlbumPage extends StatelessWidget {
                                 language: language,
                                 englishText: totalSongs![index].writer!,
                                 tamilText: totalSongs![index].writerTam,
-                                devanagariText: totalSongs![index].titleDev,
-                                kannadaText: totalSongs![index].titleKan,
-                                teluguText: totalSongs![index].titleTel,
+                                devanagariText: totalSongs![index].writerDev,
+                                kannadaText: totalSongs![index].writerKan,
+                                teluguText: totalSongs![index].writerTel,
                                 style: const TextStyle(fontSize: 12),
                               ),
                             ),
@@ -86,8 +102,9 @@ class AlbumPage extends StatelessWidget {
                               "${totalSongs![index].duration}",
                               textAlign: TextAlign.center,
                             ),
-                            onTap: () {
-                              Navigator.of(context).push(
+                            onTap: () async {
+                              var demo = await Navigator.push(
+                                context,
                                 MaterialPageRoute(
                                   builder: (context) => Song(
                                     songs: totalSongs![index],
@@ -97,6 +114,7 @@ class AlbumPage extends StatelessWidget {
                                   ),
                                 ),
                               );
+                              if (demo != null && demo is String) {}
                             },
                           ),
                         );
@@ -154,8 +172,9 @@ class MySliverAppBar extends SliverPersistentHeaderDelegate {
                   style: const TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.w700,
-                    fontSize: 20,
+                    fontSize: 18,
                   ),
+                  maxLines: 1,
                   textAlign: TextAlign.left,
                 ),
               ],

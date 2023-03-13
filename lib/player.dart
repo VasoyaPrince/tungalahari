@@ -5,6 +5,7 @@ import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'service/download_service.dart';
 import 'model/songs.dart';
 import 'language_String.dart';
@@ -80,7 +81,7 @@ class _PlayerState extends State<Player> {
       });
     }
     _downloadStream =
-        DownloadService().downloadTask.listen((TaskInfo taskInfo) async {
+        DownloadService().downloadTaskStream.listen((TaskInfo taskInfo) async {
       try {
         if (taskInfo == _taskInfo) {
           setState(() {
@@ -145,7 +146,7 @@ class _PlayerState extends State<Player> {
                 fontSize: 18.0,
               ),
               textAlign: TextAlign.center,
-              maxLine: 3,
+              maxLine: 2,
             ),
           ),
           const SizedBox(
@@ -245,6 +246,7 @@ class _PlayerState extends State<Player> {
                       ? SizedBox.square(
                           dimension: 40,
                           child: Stack(
+                            alignment: Alignment.center,
                             children: [
                               const CircularProgressIndicator(),
                               Text(
@@ -259,8 +261,23 @@ class _PlayerState extends State<Player> {
                           ),
                         )
                       : _taskInfo.status == DownloadTaskStatus.complete
-                          ? Image.asset('assets/images/downloaded.png',
-                              width: 40.0, height: 30.0)
+                          ? GestureDetector(
+                              onTap: () {
+                                Fluttertoast.showToast(
+                                    msg: "Already Downloaded Song !!");
+                              },
+                              child: Builder(
+                                builder: (context) {
+                                  widget.songs.isDownland = true;
+                                  return Image.asset(
+                                    'assets/images/downloaded.png',
+                                    width: 40.0,
+                                    height: 30.0,
+                                  );
+
+                                }
+                              ),
+                            )
                           : Image.asset('assets/images/download.png',
                               width: 40.0, height: 30.0),
                 ),

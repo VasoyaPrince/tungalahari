@@ -26,7 +26,7 @@ class AlbumItems extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               SizedBox(
-                height: 170,
+                height: 165,
                 child: Image.asset(
                   'assets/images/${album.id}.png',
                   fit: BoxFit.fill,

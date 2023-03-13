@@ -13,9 +13,10 @@ import 'package:permission_handler/permission_handler.dart';
 
 class DownloadService {
   final ReceivePort _port = ReceivePort();
-  final StreamController<TaskInfo> _downloadTask = StreamController<TaskInfo>();
+  final StreamController<TaskInfo> _downloadTask =
+      StreamController<TaskInfo>.broadcast();
 
-  Stream<TaskInfo> get downloadTask => _downloadTask.stream;
+  Stream<TaskInfo> get downloadTaskStream => _downloadTask.stream;
 
   DownloadService._() {
     _bindBackgroundIsolate();
@@ -37,18 +38,18 @@ class DownloadService {
       return;
     }
     _port.listen((data) async {
-      String id = data[0];
-      DownloadTaskStatus status = data[1];
-      int progress = data[2];
+      log("Progress: ${data[2]}");
+      String id = data[0] as String;
+      DownloadTaskStatus status = DownloadTaskStatus(data[1] as int);
+      int progress = data[2] as int;
+
       if (status == DownloadTaskStatus.complete) {
         Fluttertoast.showToast(msg: "Downloaded");
       } else if (status == DownloadTaskStatus.failed) {
         await FlutterDownloader.remove(taskId: id);
       }
-      _downloadTask.sink.add(TaskInfo()
-        ..taskId = id
-        ..status = status
-        ..progress = progress);
+      _downloadTask
+          .add(TaskInfo(taskId: id, status: status, progress: progress));
     });
   }
 
@@ -65,7 +66,7 @@ class DownloadService {
     await FlutterDownloader.cancel(taskId: taskId);
   }
 
-  Future<bool> downloadFile(TaskInfo task,String fileName) async {
+  Future<bool> downloadFile(TaskInfo task, String fileName) async {
     Directory dir;
     try {
       if (await _checkPermission()) {
@@ -75,7 +76,7 @@ class DownloadService {
       }
       log("path ${dir.path}");
       Fluttertoast.showToast(msg: "Downloading");
-      await _requestDownload(task, dir.path,fileName);
+      await _requestDownload(task, dir.path, fileName);
       return true;
     } catch (e) {
       log('$e');
@@ -115,7 +116,8 @@ class DownloadService {
     return savedDir;
   }
 
-  Future<void> _requestDownload(TaskInfo task, String path, String fileName) async {
+  Future<void> _requestDownload(
+      TaskInfo task, String path, String fileName) async {
     task.taskId = await FlutterDownloader.enqueue(
       url: task.link!,
       // headers: {"auth": "test_for_sql_encoding"},
@@ -147,21 +149,21 @@ class DownloadService {
   static void downloadCallback(
           String id, DownloadTaskStatus status, int progress) =>
       IsolateNameServer.lookupPortByName('downloader_send_port')
-          ?.send([id, status, progress]);
+          ?.send([id, status.value, progress]);
 }
 
 class TaskInfo {
   final String? link;
 
   String? taskId;
-  int progress = 0;
-  DownloadTaskStatus status = DownloadTaskStatus.undefined;
+  int? progress = 0;
+  DownloadTaskStatus? status = DownloadTaskStatus.undefined;
 
-  TaskInfo({this.link});
-
-  @override
-  bool operator ==(Object other) => other is TaskInfo && link == other.link;
+  TaskInfo({this.link, this.taskId, this.progress, this.status});
 
   @override
-  int get hashCode => link.hashCode;
+  bool operator ==(Object other) => other is TaskInfo && taskId == other.taskId;
+
+  @override
+  int get hashCode => taskId.hashCode;
 }

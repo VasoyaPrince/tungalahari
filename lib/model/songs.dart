@@ -17,6 +17,7 @@ class Songs {
   final String? lyricsKan;
   final String? lyricsTam;
   final String? lyricsTel;
+   bool? isDownland = false;
 
   Songs({
     this.id,
@@ -37,6 +38,7 @@ class Songs {
     this.lyricsKan,
     this.lyricsTam,
     this.lyricsTel,
+    this.isDownland,
   });
 
   factory Songs.fromJson(Map<String, dynamic> json) {
